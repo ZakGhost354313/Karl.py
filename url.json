@@ -1,0 +1,8 @@
+{
+  "people": {
+    "test": "https://chat.googleapis.com/v1/spaces/redacted/messages?key=redacted&token=redacted%3D"
+  },
+  "groups": {
+    "test": "https://chat.googleapis.com/v1/spaces/redacted/messages?key=redacted&token=redacted%3D"
+  },
+}

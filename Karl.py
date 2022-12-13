@@ -7,8 +7,8 @@ except ImportError: from argparse import Namespace
 import httplib2
 args = sys.argv
 url = json.loads(open('./url.json').read(), object_hook=lambda d: Namespace(**d))
-def send(_in, url): print(httplib2.Http().request(uri=url, method='POST', headers={'Content-Type': 'application/json; charset=UTF-8'},body=json.dumps(_in)))
-def beemovie(_in): with open('beemovie.txt') as f: for x in f.read().splitlines(): send(x,who)
+def send(_in, w): print(httplib2.Http().request(uri=w, method='POST', headers={'Content-Type': 'application/json; charset=UTF-8'},body=json.dumps(_in)))
+def beemovie(w): with open('beemovie.txt') as f: for x in f.read().splitlines(): send(x,w)
 def hilfe():
   t = f"""
 Usage: cmd [OPTION] [idk]
@@ -20,16 +20,19 @@ this isnt done yet idk
 
 """
   print(t)
-def usage(arg):
+def usage(a):
   print(f"Error:   {a}  is not a valid entry")
   hilfe()
-
+def _get():
+  a = {"g":url.groups,"groups":url.groups,"group":url.groups,"p":url.people,"people":url.people}.get(args[2],usage(args[2]))
+  for x in a:
+    print(x)
 def sw_1(a):
   sw = {
     "-h": hilfe(),
     "--help": hilfe(),
-    "-g": get(),
-    "--get": get()
+    "-g": _get(),
+    "--get": _get()
   }
   return sw.get(a, usage(a))
 

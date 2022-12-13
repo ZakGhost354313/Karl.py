@@ -2,12 +2,12 @@
 import os
 import sys
 import json
-try: from types import SimpleNamespace as Namespace
-except ImportError: from argparse import Namespace
+try: from types import SimpleNamespace as nspc
+except ImportError: from argparse import Namespace as nspc
 import httplib2
 args = sys.argv
-url = json.loads(open('./url.json').read(), object_hook=lambda d: Namespace(**d))
-def send(_in, w): print(httplib2.Http().request(uri=w, method='POST', headers={'Content-Type': 'application/json; charset=UTF-8'},body=json.dumps(_in)))
+url = json.loads(open('./url.json').read(), object_hook=lambda d: nspc(**d))
+def send(_in, w): print(httplib2.Http().request(uri=w, method='POST', headers={'Content-Type': 'application/json; charset=UTF-8'},body=json.dumps({'text':_in})))
 def beemovie(w): with open('beemovie.txt') as f: for x in f.read().splitlines(): send(x,w)
 def hilfe():
   t = f"""
@@ -23,10 +23,7 @@ this isnt done yet idk
 def usage(a):
   print(f"Error:   {a}  is not a valid entry")
   hilfe()
-def _get():
-  a = {"g":url.groups,"groups":url.groups,"group":url.groups,"p":url.people,"people":url.people}.get(args[2],usage(args[2]))
-  for x in a:
-    print(x)
+def _get(): for x in {"g":url.groups,"groups":url.groups,"group":url.groups,"p":url.people,"people":url.people}.get(args[2],usage(args[2])): print(x)
 def sw_1(a):
   sw = {
     "-h": hilfe(),
